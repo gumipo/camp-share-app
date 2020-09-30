@@ -29,7 +29,6 @@
   margin: 0 auto;
   max-width: 400px;
   padding: 1rem;
-  height: auto;
   width: calc(100% - 2rem);
 }
 
@@ -82,9 +81,13 @@
 }
 
 .p-media__thumb {
-  position: relative;
   overflow: hidden;
+  object-fit: cover;
+  height: 400px;
   width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: black;
 }
 
 .p-media__thumb::before {
@@ -97,7 +100,7 @@
   position: absolute;
   object-fit: cover;
   object-position: center;
-  top: 0;
+  /* top: 0; */
   left: 0;
   width: 100%;
   height: auto;
@@ -145,6 +148,16 @@
 
 .u-display-none {
   display: none;
+}
+
+.text-cursor {
+  cursor: pointer;
+  width: 280px;
+  margin: 0 auto;
+}
+.text-cursor:hover {
+  opacity: 0.7;
+  color: blue;
 }
 
 @media screen and (min-width: 576px) {
