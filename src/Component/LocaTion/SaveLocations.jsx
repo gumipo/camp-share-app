@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { TextInput, SelectBox, PrimaryButton } from "../UIkit";
 import { saveLocation } from "../../redux/Location/operations";
-import ImageArea from "./ImageArea";
+import LocationImageArea from "../LocaTion/LocationImageArea";
 
 const SaveLocations = () => {
   const dispatch = useDispatch();
@@ -47,13 +47,15 @@ const SaveLocations = () => {
     { id: "gihu", name: "岐阜" },
     { id: "mie", name: "三重" },
     { id: "shizuoka", name: "静岡" },
+    { id: "all", name: "全て" },
   ];
 
   return (
     <section>
+      <div style={{ paddingTop: 200 }} />
       <h2 className="u-text__headline u-text-center">キャンプ場の登録</h2>
       <div className="c-section-container">
-        <ImageArea images={images} setImages={setImages} />
+        <LocationImageArea images={images} setImages={setImages} />
 
         <TextInput
           fullWidth={true}

@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 16,
     minWidth: 120,
     width: "100%",
+    marginRight: 30,
   },
 }));
 

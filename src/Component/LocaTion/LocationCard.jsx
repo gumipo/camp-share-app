@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -11,8 +11,8 @@ import { Language } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 500,
-    margin: 100,
+    maxWidth: 400,
+    margin: 20,
     boxShadow: "0px 0px 10px 5px",
   },
   image: {
@@ -29,13 +29,10 @@ export default function ImgMediaCard(props) {
   return (
     <Card className={classes.root}>
       <CardActionArea>
-        {/* //swiper */}
         <CardMedia>
           <ImageSwiper images={props.images} className={classes.image} />
         </CardMedia>
       </CardActionArea>
-      {/* //text */}
-
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2">
           {props.name}
@@ -44,10 +41,8 @@ export default function ImgMediaCard(props) {
           {"住所 : " + props.address}
         </Typography>
       </CardContent>
-
-      {/* //buttom */}
       <CardActions>
-        　　　　
+        　　
         <a
           href={
             "https://twitter.com/search?q=%23" +

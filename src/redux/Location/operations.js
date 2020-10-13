@@ -3,6 +3,24 @@ import { fetchLocationsAction } from "../Location/actions";
 
 const locationsRef = db.collection("locations");
 
+export const fetchLocations = (prefecture) => {
+  return async (dispatch) => {
+    let query = locationsRef.orderBy("updated_at", "desc");
+    query =
+      prefecture !== "all"
+        ? query.where("prefecture", "==", prefecture)
+        : query;
+    query.get().then((snapshots) => {
+      const locationsList = [];
+      snapshots.forEach((snapshot) => {
+        const location = snapshot.data();
+        locationsList.push(location);
+      });
+      dispatch(fetchLocationsAction(locationsList));
+    });
+  };
+};
+
 export const saveLocation = (
   images,
   name,
@@ -34,18 +52,18 @@ export const saveLocation = (
 };
 
 //firestoreからProducts情報を取得してactionsに投げる
-export const fetchLocations = () => {
-  return async (dispatch) => {
-    locationsRef
-      .orderBy("updated_at", "desc")
-      .get()
-      .then((snapshots) => {
-        const locationList = [];
-        snapshots.forEach((snapshot) => {
-          const location = snapshot.data();
-          locationList.push(location);
-        });
-        dispatch(fetchLocationsAction(locationList));
-      });
-  };
-};
+// export const fetchLocations = () => {
+//   return async (dispatch) => {
+//     locationsRef
+//       .orderBy("updated_at", "desc")
+//       .get()
+//       .then((snapshots) => {
+//         const locationList = [];
+//         snapshots.forEach((snapshot) => {
+//           const location = snapshot.data();
+//           locationList.push(location);
+//         });
+//         dispatch(fetchLocationsAction(locationList));
+//       });
+//   };
+// };

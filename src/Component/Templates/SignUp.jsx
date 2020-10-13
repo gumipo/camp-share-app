@@ -4,14 +4,28 @@ import { PrimaryButton } from "../UIkit";
 import { signUp } from "../../redux/Users/operations";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
+import ProfileImageArea from "../Templates/ProfileImageArea";
+import { makeStyles } from "@material-ui/styles";
+
+const useStyles = makeStyles({
+  image: {
+    objectFit: "cover",
+    margin: "8px 16px 8px 0",
+    height: 100,
+    width: 100,
+    borderRadius: "50%",
+  },
+});
 
 const SignUp = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
 
   const [username, setUsername] = useState(""),
     [email, setEmail] = useState(""),
     [password, setPassword] = useState(""),
-    [confirmPassword, setConfirmPassword] = useState("");
+    [confirmPassword, setConfirmPassword] = useState(""),
+    [image, setImage] = useState([]);
 
   const iunputUserName = useCallback(
     (event) => {

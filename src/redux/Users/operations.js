@@ -2,6 +2,7 @@ import { signInAction, signOutAction } from "./actions";
 import { push } from "connected-react-router";
 //import firebase
 import { auth, FirebaseTimestamp, db } from "../../Firebase/index";
+import firebase from "firebase";
 
 //認証をリッスン関数
 export const listenAuthState = () => {
@@ -57,7 +58,7 @@ export const signIn = (email, password) => {
                 username: data.username,
               })
             );
-            dispatch(push("/location/add"));
+            dispatch(push("/"));
           });
       }
     });
@@ -141,13 +142,123 @@ export const signOut = () => {
   return async (dispatch) => {
     auth.signOut().then(() => {
       dispatch(signOutAction());
-      dispatch(push("/signin"));
+      dispatch(push("/login"));
     });
   };
 };
 
 //Twitterでログイン
+export const twitterLogin = () => {
+  return async (dispatch) => {
+    const provider = new firebase.auth.TwitterAuthProvider();
+    firebase.auth().languageCode = "pt";
+    provider.setCustomParameters({
+      lang: "es",
+    });
+
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        console.log(result);
+        const user = result.user;
+        const uid = user.uid;
+        const email = user.email;
+        const username = user.displayName;
+        const image = user.photoURL;
+        const timestamp = FirebaseTimestamp.now();
+
+        const userData = {
+          createed_at: timestamp,
+          updated_at: timestamp,
+          role: "customer",
+          uid: uid,
+          email: email,
+          username: username,
+          image: image,
+        };
+
+        //firebaseに登録
+        db.collection("users")
+          .doc(uid)
+          .set(userData)
+          .then(() => {
+            dispatch(push("/"));
+          });
+      });
+  };
+};
 
 //facebookでログイン
+export const facebookLogin = () => {
+  return (dispatch) => {
+    const provider = new firebase.auth.FacebookAuthProvider();
+    firebase.auth().languageCode = "fr_FR";
+    provider.setCustomParameters({
+      display: "popup",
+    });
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        console.log(result);
+        const user = result.user;
+        const uid = user.uid;
+        const timestamp = FirebaseTimestamp.now();
+
+        const userData = {
+          createed_at: timestamp,
+          updated_at: timestamp,
+          role: "customer",
+          uid: uid,
+        };
+        db.collection("users")
+          .doc(uid)
+          .set(userData)
+          .then(() => {
+            dispatch(push("/"));
+          });
+      });
+  };
+};
 
 //googleでログイン
+export const googleLogin = () => {
+  return (dispatch) => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().languageCode = "pt";
+    provider.setCustomParameters({
+      login_hint: "user@example.com",
+    });
+
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        console.log(result);
+        const user = result.user;
+        const image = user.photoURL;
+        const uid = user.uid;
+        const email = user.email;
+        const username = user.displayName;
+        const timestamp = FirebaseTimestamp.now();
+
+        const userData = {
+          createed_at: timestamp,
+          updated_at: timestamp,
+          role: "customer",
+          uid: uid,
+          email: email,
+          username: username,
+          image: image,
+        };
+
+        db.collection("users")
+          .doc(uid)
+          .set(userData)
+          .then(() => {
+            dispatch(push("/"));
+          });
+      });
+  };
+};

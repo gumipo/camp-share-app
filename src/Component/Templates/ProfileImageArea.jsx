@@ -3,7 +3,7 @@ import IconButton from "@material-ui/core/IconButton";
 import AddPhotoAlternateIcon from "@material-ui/icons/AddPhotoAlternate";
 import { makeStyles } from "@material-ui/core";
 import { storage } from "../../Firebase/index";
-import ImagePreview from "./ImagePreview";
+import ImagePreview from "../LocaTion/ImagePreview";
 
 const useStyles = makeStyles({
   icon: {
@@ -12,7 +12,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ImageArea = (props) => {
+const ProfileImageArea = (props) => {
   const classes = useStyles();
 
   //画像の削除
@@ -22,12 +22,12 @@ const ImageArea = (props) => {
       if (!ret) {
         return false;
       } else {
-        const newImages = props.images.filter((image) => image.id !== id);
-        props.setImages(newImages);
+        const newimage = props.image.filter((image) => image.id !== id);
+        props.setImage(newimage);
         return storage.ref("images").child(id).delete();
       }
     },
-    [props.images]
+    [props.image]
   );
 
   //画像のアップロード
@@ -44,25 +44,25 @@ const ImageArea = (props) => {
         .map((n) => S[n % S.length])
         .join("");
 
-      const uploadRef = storage.ref("images").child(fileName);
+      const uploadRef = storage.ref("image").child(fileName);
       const uploadTask = uploadRef.put(blob);
 
       uploadTask.then(() => {
         //アップロードできたら
         uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
           const newImage = { id: fileName, path: downloadURL };
-          props.setImages((prevState) => [...prevState, newImage]);
+          props.setImage((prevState) => [...prevState, newImage]);
         });
       });
     },
-    [props.setImages]
+    [props.setImage]
   );
 
   return (
     <div>
-      <div className="p-grid__list-images">
-        {props.images.length > 0 &&
-          props.images.map((image) => (
+      <div className="p-grid__list-image">
+        {props.image.length > 0 &&
+          props.image.map((image) => (
             <ImagePreview
               id={image.id}
               path={image.path}
@@ -88,4 +88,4 @@ const ImageArea = (props) => {
     </div>
   );
 };
-export default ImageArea;
+export default ProfileImageArea;

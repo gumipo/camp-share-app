@@ -21,7 +21,6 @@ const Reset = () => {
     <div className="c-section-container">
       <h2 className="u-text__headline u-text-center">パスワードのリセット</h2>
       <div className="module-spacer--medium" />
-
       <TextInput
         fullWidth={true}
         label={"メールアドレス"}
