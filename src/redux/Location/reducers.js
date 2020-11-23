@@ -13,6 +13,11 @@ export const LocationsReducer = (state = initialState.locations, action) => {
         ...state,
         list: [...action.payload],
       };
+    case Actions.FETCH_WEATHER:
+      return {
+        ...state,
+        weather: action.payload,
+      };
     default:
       return state;
   }

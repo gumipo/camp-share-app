@@ -6,3 +6,8 @@ export const getLocations = createSelector(
   [productsSelector],
   (state) => state.list
 );
+
+export const getLocationWeather = createSelector(
+  [productsSelector],
+  (state) => state.weather
+);
