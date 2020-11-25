@@ -6,3 +6,4 @@ export { default as SerchLocation } from "./SerchLocation";
 export { default as AppDescription } from "./AppDescription";
 export { default as Home } from "./Home";
 export { default as LocationWeather } from "./LocationWeather";
+export { default as WeatherStats } from "./WeatherStats";

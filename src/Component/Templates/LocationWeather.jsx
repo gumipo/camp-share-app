@@ -15,8 +15,8 @@ const LocationWeather = () => {
       <h1>天気予報</h1>
       <div>
         {timeWeatherList.length > 0 &&
-          timeWeatherList.map((timeweather) => (
-            <WeatherListItem key={timeweather} timeweather={timeweather} />
+          timeWeatherList.map((timeweather, index) => (
+            <WeatherListItem key={index} timeweather={timeweather} />
           ))}
       </div>
     </div>

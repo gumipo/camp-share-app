@@ -9,6 +9,7 @@ import {
   AppDescription,
   SerchLocation,
   LocationWeather,
+  WeatherStats,
 } from "./Component/Templates/index";
 
 const Router = () => {
@@ -21,7 +22,9 @@ const Router = () => {
         <Route exact path={"/"} component={SerchLocation} />
         <Route exact path={"/location/add"} component={addLocation} />
         <Route exact path={"/app/description"} component={AppDescription} />
+        {/* <WeatherStats> */}
         <Route exact path={"/location/weather"} component={LocationWeather} />
+        {/* </WeatherStats> */}
       </Auth>
     </Switch>
   );
