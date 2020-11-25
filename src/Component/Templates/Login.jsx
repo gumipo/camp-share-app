@@ -7,13 +7,8 @@ import logo from "../../assets/image/rampe.svg";
 import logo2 from "../../assets/image/fire.svg";
 import CampImage from "../../assets/image/loginphot.jpg";
 import TwitterIcon from "@material-ui/icons/Twitter";
-import FacebookIcon from "@material-ui/icons/Facebook";
 import MailIcon from "@material-ui/icons/Mail";
-import {
-  twitterLogin,
-  facebookLogin,
-  googleLogin,
-} from "../../redux/Users/operations";
+import { twitterLogin, googleLogin } from "../../redux/Users/operations";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -21,11 +16,10 @@ const Login = () => {
     <StyledLogin className="c-main">
       <LoginTitle>
         <TitleLogo src={logo} />
-        AppTitle
+        go Camp
         <TitleLogo src={logo2} />
       </LoginTitle>
       <div className="module-spacer--medium" />
-
       <LayoutFlex>
         <LoginImage src={CampImage} />
         <LoginButtonArea>
@@ -34,16 +28,10 @@ const Login = () => {
             <MailIcon style={{ marginRight: 10 }} />
             Sign in With Google
           </GoogleLoginButton>
-
           <TwitterLoginButton onClick={() => dispatch(twitterLogin())}>
             <TwitterIcon style={{ marginRight: 10 }} />
             Sign in With Twitter
           </TwitterLoginButton>
-
-          <FacebookLoginButton onClick={() => dispatch(facebookLogin())}>
-            <FacebookIcon style={{ marginRight: 10 }} />
-            Sign in With Facebook
-          </FacebookLoginButton>
           <SignIn />
         </LoginButtonArea>
       </LayoutFlex>
@@ -66,7 +54,6 @@ const StyledLogin = styled.section`
   @media screen and (max-width: 767px) {
     width: 350px;
   }
-
   button {
     margin: 0 auto;
     text-align: center;
@@ -87,7 +74,6 @@ const StyledLogin = styled.section`
     opacity: 0.7;
   }
 `;
-
 const LayoutFlex = styled.div`
   width: 800px;
   margin: 0 auto;
@@ -96,7 +82,6 @@ const LayoutFlex = styled.div`
     width: 350px;
   }
 `;
-
 const LoginImage = styled.img`
   margin-right: 20px;
   width: 380px;
@@ -109,9 +94,7 @@ const LoginImage = styled.img`
     display: none;
   }
 `;
-
 const LoginTitle = styled.div`
-  padding: 20px;
   width: 500px;
   margin: 0 auto;
   font-family: "Permanent Marker", cursive;
@@ -124,12 +107,10 @@ const LoginTitle = styled.div`
     font-size: 50px;
   }
 `;
-
 const TitleLogo = styled.img`
   width: 60px;
   height: 60px;
 `;
-
 const LoginButtonArea = styled.div`
   width: 400px;
   margin: 0 auto;
@@ -145,16 +126,10 @@ const LoginButtonArea = styled.div`
     width: 400px;
   }
 `;
-
 const GoogleLoginButton = styled.button`
   background-color: rgb(226 4 0);
   color: white;
 `;
-
 const TwitterLoginButton = styled.button`
   background-color: aqua;
-`;
-const FacebookLoginButton = styled.button`
-  background-color: navy;
-  color: white;
 `;

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLocations } from "../../redux/Location/operations";
 import { getLocations } from "../../redux/Location/selector";
-import LocationCard from "../Location/LocationCard";
+import LocationCard from "../LocaTion/LocationCard";
 import styled from "styled-components";
 import { PrimaryButton, SelectBox } from "../UIkit";
 
@@ -21,7 +21,7 @@ const SerchLocation = () => {
   ];
 
   return (
-    <section className="c-section-wrapin">
+    <StyledSection className="c-section-wrapin">
       <StyledHomeTitle>キャンプ場を探す</StyledHomeTitle>
       <div className="module-spacer--medium" />
       <SelectBox
@@ -35,7 +35,7 @@ const SerchLocation = () => {
         label="検索する"
         onClick={() => dispatch(fetchLocations(prefecture))}
       />
-      <div className="p-grid__row">
+      <div>
         {locations.length > 0 &&
           locations.map((location, index) => (
             <LocationCard
@@ -50,14 +50,19 @@ const SerchLocation = () => {
             />
           ))}
       </div>
-    </section>
+    </StyledSection>
   );
 };
 export default SerchLocation;
 
-const StyledHomeTitle = styled.h1`
+const StyledSection = styled.section`
   width: 100%;
-  margin: 0 auto;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+`;
+
+const StyledHomeTitle = styled.h1`
   margin-top: 64px;
   font-size: 50px;
   color: black;

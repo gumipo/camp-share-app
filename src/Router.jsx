@@ -1,7 +1,7 @@
 import React from "react";
 import Auth from "./Auth";
 import { Route, Switch } from "react-router";
-import addLocation from "./Component/Location/SaveLocations";
+// import SaveLocations from "./Component/LocaTion/SaveLocations";
 import {
   Login,
   SignUp,
@@ -20,11 +20,11 @@ const Router = () => {
       <Route exact path={"/reset"} component={Reset} />
       <Auth>
         <Route exact path={"/"} component={SerchLocation} />
-        <Route exact path={"/location/add"} component={addLocation} />
+        {/* <Route exact path={"/location/add"} component={SaveLocations} /> */}
         <Route exact path={"/app/description"} component={AppDescription} />
-        {/* <WeatherStats> */}
-        <Route exact path={"/location/weather"} component={LocationWeather} />
-        {/* </WeatherStats> */}
+        <WeatherStats>
+          <Route exact path={"/location/weather"} component={LocationWeather} />
+        </WeatherStats>
       </Auth>
     </Switch>
   );

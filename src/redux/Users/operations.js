@@ -151,9 +151,8 @@ export const signOut = () => {
 export const twitterLogin = () => {
   return async (dispatch) => {
     const provider = new firebase.auth.TwitterAuthProvider();
-    firebase.auth().languageCode = "pt";
     provider.setCustomParameters({
-      lang: "es",
+      lang: "ja",
     });
 
     firebase
@@ -184,39 +183,9 @@ export const twitterLogin = () => {
           .set(userData)
           .then(() => {
             dispatch(push("/"));
-          });
-      });
-  };
-};
-
-//facebookでログイン
-export const facebookLogin = () => {
-  return (dispatch) => {
-    const provider = new firebase.auth.FacebookAuthProvider();
-    firebase.auth().languageCode = "fr_FR";
-    provider.setCustomParameters({
-      display: "popup",
-    });
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then((result) => {
-        console.log(result);
-        const user = result.user;
-        const uid = user.uid;
-        const timestamp = FirebaseTimestamp.now();
-
-        const userData = {
-          createed_at: timestamp,
-          updated_at: timestamp,
-          role: "customer",
-          uid: uid,
-        };
-        db.collection("users")
-          .doc(uid)
-          .set(userData)
-          .then(() => {
-            dispatch(push("/"));
+          })
+          .catch(() => {
+            alert("ログインに失敗しました");
           });
       });
   };
@@ -226,7 +195,6 @@ export const facebookLogin = () => {
 export const googleLogin = () => {
   return (dispatch) => {
     const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().languageCode = "pt";
     provider.setCustomParameters({
       login_hint: "user@example.com",
     });
@@ -258,6 +226,9 @@ export const googleLogin = () => {
           .set(userData)
           .then(() => {
             dispatch(push("/"));
+          })
+          .catch(() => {
+            alert("ログインに失敗しました。");
           });
       });
   };

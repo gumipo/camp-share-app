@@ -27,7 +27,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ImgMediaCard(props) {
+export default function LocationCard(props) {
   const dispatch = useDispatch();
   const classes = useStyles();
 

@@ -1,20 +1,20 @@
 import React, { useEffect } from "react";
 import { push } from "connected-react-router";
 import { useSelector, useDispatch } from "react-redux";
-import { getLocationWeather } from "../../redux/Location/selector";
+import { getLocations } from "../../redux/Location/selector";
 
 const WeatherStats = ({ children }) => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-  const weather = getLocationWeather(selector);
+  const location = getLocations(selector);
 
   useEffect(() => {
-    if (weather === {}) {
+    if (location.length === 0) {
       dispatch(push("/"));
     }
   }, []);
 
-  if (weather === {}) {
+  if (location.length === 0) {
     return <></>;
   } else {
     return children;
