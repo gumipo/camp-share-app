@@ -50,20 +50,3 @@ export const saveLocation = (
       });
   };
 };
-
-//firestoreからProducts情報を取得してactionsに投げる
-// export const fetchLocations = () => {
-//   return async (dispatch) => {
-//     locationsRef
-//       .orderBy("updated_at", "desc")
-//       .get()
-//       .then((snapshots) => {
-//         const locationList = [];
-//         snapshots.forEach((snapshot) => {
-//           const location = snapshot.data();
-//           locationList.push(location);
-//         });
-//         dispatch(fetchLocationsAction(locationList));
-//       });
-//   };
-// };

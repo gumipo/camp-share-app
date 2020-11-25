@@ -4,7 +4,6 @@ import { PrimaryButton } from "../UIkit";
 import { signUp } from "../../redux/Users/operations";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
-import ProfileImageArea from "../Templates/ProfileImageArea";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles({

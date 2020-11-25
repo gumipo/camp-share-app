@@ -1,6 +1,7 @@
 const initialState = {
   locations: {
     list: [],
+    weather: {},
   },
 
   users: {

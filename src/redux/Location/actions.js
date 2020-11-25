@@ -13,3 +13,11 @@ export const deleteLocationAction = (locations) => {
     payload: locations,
   };
 };
+
+export const FETCH_WEATHER = "FETCH_WEATHER";
+export const fetchWeatherDataAction = (weatherdata) => {
+  return {
+    type: "FETCH_WEATHER",
+    payload: weatherdata,
+  };
+};

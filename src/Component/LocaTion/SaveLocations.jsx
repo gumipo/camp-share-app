@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { TextInput, SelectBox, PrimaryButton } from "../UIkit";
 import { saveLocation } from "../../redux/Location/operations";
-import LocationImageArea from "../LocaTion/LocationImageArea";
+import LocationImageArea from "../Location/LocationImageArea";
 
 const SaveLocations = () => {
   const dispatch = useDispatch();

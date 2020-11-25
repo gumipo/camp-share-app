@@ -13,9 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import SearchIcon from "@material-ui/icons/Search";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import HistoryIcon from "@material-ui/icons/History";
-import PersonIcon from "@material-ui/icons/Person";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import HelpOutline from "@material-ui/icons/HelpOutline";
 
@@ -26,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
       width: 256,
     },
   },
+
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: 256,
@@ -59,23 +58,9 @@ const ClosableDrawer = (props) => {
   const menus = [
     {
       func: selectMenu,
-      label: "投稿する",
-      icon: <AddCircleIcon />,
-      id: "register",
-      value: "/add/campreport",
-    },
-    {
-      func: selectMenu,
-      label: "みんなの投稿",
-      icon: <HistoryIcon />,
-      id: "history",
-      value: "/order/history",
-    },
-    {
-      func: selectMenu,
-      label: "プロフィール",
-      icon: <PersonIcon />,
-      id: "profile",
+      label: "お気に入り",
+      icon: <FavoriteIcon />,
+      id: "favorite",
       value: "/user/mypage",
     },
   ];
