@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Swiper from "react-id-swiper";
 import NoImage from "../../assets/image/no_image.png";
 import "swiper/css/swiper.css";
+import styled from "styled-components";
 
 const ImageSwiper = (props) => {
   const [params] = useState({
@@ -15,21 +16,21 @@ const ImageSwiper = (props) => {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev",
     },
-    loop: true,
+    loop: false,
   });
   const images = props.images;
 
   return (
     <Swiper {...params}>
       {images.length === 0 ? (
-        <div className="p-media__thumb">
+        <StyledImageArea>
           <img src={NoImage} alt="no image" />
-        </div>
+        </StyledImageArea>
       ) : (
         images.map((image) => (
-          <div className="p-media__thumb" key={image.path}>
-            <img src={image.path} aly="商品画像" />
-          </div>
+          <StyledImageArea key={image.path}>
+            <img src={image.path} aly="キャンプ場" />
+          </StyledImageArea>
         ))
       )}
     </Swiper>
@@ -37,3 +38,13 @@ const ImageSwiper = (props) => {
 };
 
 export default ImageSwiper;
+
+const StyledImageArea = styled.div`
+  display: grid;
+  place-items: center;
+  img {
+    width: 100%;
+    object-fit: center;
+    object-position: center;
+  }
+`;

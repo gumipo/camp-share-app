@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { push } from "connected-react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { getLocationWeather } from "../../redux/Location/selector";
-import WeatherListItem from "../LocaTion/WeatherListItem";
 import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -30,6 +29,7 @@ const LocationWeather = () => {
   console.log(weather);
   return (
     <StyledLocationWeather>
+      <button onClick={() => dispatch(push("/"))}>戻る</button>
       <StyledTitle>{weather.city.name}の天気予報</StyledTitle>
       <Divider />
       <TableContainer component={Paper}>
@@ -74,7 +74,8 @@ export default LocationWeather;
 
 const StyledLocationWeather = styled.section`
   width: 800px;
-  margin: 100px auto;
+  margin: 0 auto;
+  padding-top: 150px;
 `;
 
 const StyledTitle = styled.h2`

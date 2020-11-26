@@ -16,6 +16,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import HelpOutline from "@material-ui/icons/HelpOutline";
+import SelectBox from "../../Component/UIkit/SelectBox";
+import { fetchLocations } from "../../redux/Location/operations";
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -41,6 +43,7 @@ const ClosableDrawer = (props) => {
   const { container } = props;
   const dispatch = useDispatch();
 
+  const [prefecture, setPrefecture] = useState("");
   const [keyword, setKeyword] = useState("");
 
   const inputKeyword = useCallback(
@@ -65,6 +68,14 @@ const ClosableDrawer = (props) => {
     },
   ];
 
+  const prefectures = [
+    { id: "all", name: "全て" },
+    { id: "aichi", name: "愛知" },
+    { id: "gihu", name: "岐阜" },
+    { id: "mie", name: "三重" },
+    { id: "shizuoka", name: "静岡" },
+  ];
+
   return (
     <nav className={classes.drawer}>
       <Drawer
@@ -81,16 +92,19 @@ const ClosableDrawer = (props) => {
           onKeyDown={(e) => props.onClose(e)}
         >
           <div className={classes.searchField}>
-            <TextInput
-              fullWidth={false}
-              label={"キーワードの入力"}
-              multiline={false}
-              required={false}
-              rows={1}
-              value={keyword}
-              onChange={inputKeyword}
+            <SelectBox
+              label={"県"}
+              required={true}
+              options={prefectures}
+              select={setPrefecture}
+              value={prefecture}
             />
-            <IconButton>
+            <IconButton
+              onClick={(e) => {
+                dispatch(fetchLocations(prefecture));
+                props.onClose(e);
+              }}
+            >
               <SearchIcon />
             </IconButton>
           </div>

@@ -7,7 +7,7 @@ import {
   SignUp,
   Reset,
   AppDescription,
-  SerchLocation,
+  Home,
   LocationWeather,
   WeatherStats,
 } from "./Component/Templates/index";
@@ -19,7 +19,7 @@ const Router = () => {
       <Route exact path={"/signup"} component={SignUp} />
       <Route exact path={"/reset"} component={Reset} />
       <Auth>
-        <Route exact path={"/"} component={SerchLocation} />
+        <Route exact path={"/"} component={Home} />
         {/* <Route exact path={"/location/add"} component={SaveLocations} /> */}
         <Route exact path={"/app/description"} component={AppDescription} />
         <WeatherStats>

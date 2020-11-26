@@ -11,7 +11,7 @@ const AppTitle = () => {
     <>
       <StyledAppTitle onClick={() => dispatch(push("/"))}>
         <AppTitleLogo src={logo} />
-        AppTitle
+        go Camp
         <AppTitleLogo src={logo2} />
       </StyledAppTitle>
     </>

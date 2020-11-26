@@ -18,9 +18,8 @@ const Reset = () => {
   );
 
   return (
-    <div className="c-section-container">
-      <h2 className="u-text__headline u-text-center">パスワードのリセット</h2>
-      <div className="module-spacer--medium" />
+    <div>
+      <h2>パスワードのリセット</h2>
       <TextInput
         fullWidth={true}
         label={"メールアドレス"}
@@ -31,14 +30,11 @@ const Reset = () => {
         type={"email"}
         onChange={iunputEmail}
       />
-
-      <div className="module-spacer--medium" />
       <div className="center">
         <PrimaryButton
           label={"メールを送信"}
           onClick={() => dispatch(resetPassword(email))}
         />
-        <div className="module-spacer--medium" />
         <p className="text-cursor" onClick={() => dispatch(push("/login"))}>
           ログイン画面に戻る
         </p>

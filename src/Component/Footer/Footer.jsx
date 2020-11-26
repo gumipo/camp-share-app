@@ -1,35 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import SearchIcon from "@material-ui/icons/Search";
-import NaturePeopleIcon from "@material-ui/icons/NaturePeople";
 
-const Hooter = () => {
+const Footer = () => {
   return (
     <StyledFooter>
-      <StyledFooterNav>
-        <StyledHooterList>
-          <li>
-            <SearchIcon />
-            <p>キャンプ場の検索</p>
-          </li>
-          <li>
-            <NaturePeopleIcon />
-            <p>みんなの投稿</p>
-          </li>
-          <li>
-            <h2>自分も投稿</h2>
-          </li>
-
-          <li>
-            <h2>プロフィール</h2>
-          </li>
-        </StyledHooterList>
-      </StyledFooterNav>
+      <StyledFooterNav></StyledFooterNav>
     </StyledFooter>
   );
 };
 
-export default Hooter;
+export default Footer;
 
 const StyledFooter = styled.footer`
   @media screen and (max-width: 767px) {
