@@ -33,7 +33,6 @@ const Header = () => {
   const classes = useStyles();
   const selector = useSelector((state) => state);
   const isSignedIn = getIsSignedIn(selector);
-  const dispatch = useDispatch();
 
   const [open, setOpen] = useState(false);
 

@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { TextInput } from "../UIkit/index";
 import { push } from "connected-react-router";
 import { signOut } from "../../redux/Users/operations";
 //import materialUi
@@ -18,6 +17,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import HelpOutline from "@material-ui/icons/HelpOutline";
 import SelectBox from "../../Component/UIkit/SelectBox";
 import { fetchLocations } from "../../redux/Location/operations";
+import { fetchFavoriteLocations } from "../../redux/Location/operations";
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -44,29 +44,6 @@ const ClosableDrawer = (props) => {
   const dispatch = useDispatch();
 
   const [prefecture, setPrefecture] = useState("");
-  const [keyword, setKeyword] = useState("");
-
-  const inputKeyword = useCallback(
-    (event) => {
-      setKeyword(event.target.value);
-    },
-    [setKeyword]
-  );
-
-  const selectMenu = (event, path) => {
-    dispatch(push(path));
-    props.onClose(event);
-  };
-
-  const menus = [
-    {
-      func: selectMenu,
-      label: "お気に入り",
-      icon: <FavoriteIcon />,
-      id: "favorite",
-      value: "/user/mypage",
-    },
-  ];
 
   const prefectures = [
     { id: "all", name: "全て" },
@@ -102,6 +79,7 @@ const ClosableDrawer = (props) => {
             <IconButton
               onClick={(e) => {
                 dispatch(fetchLocations(prefecture));
+                dispatch(push("/"));
                 props.onClose(e);
               }}
             >
@@ -111,16 +89,19 @@ const ClosableDrawer = (props) => {
           <Divider />
 
           <List>
-            {menus.map((menu) => (
-              <ListItem
-                button
-                key={menu.id}
-                onClick={(event) => menu.func(event, menu.value)}
-              >
-                <ListItemIcon>{menu.icon}</ListItemIcon>
-                <ListItemText primary={menu.label} />
-              </ListItem>
-            ))}
+            <ListItem
+              button
+              onClick={(e) => {
+                dispatch(fetchFavoriteLocations());
+                dispatch(push("/"));
+                props.onClose(e);
+              }}
+            >
+              <ListItemIcon>
+                <FavoriteIcon />
+              </ListItemIcon>
+              <ListItemText primary="お気に入り" />
+            </ListItem>
 
             <ListItem button key="logout" onClick={() => dispatch(signOut())}>
               <ListItemIcon>
@@ -138,7 +119,7 @@ const ClosableDrawer = (props) => {
               <ListItemIcon>
                 <HelpOutline />
               </ListItemIcon>
-              <ListItemText primary={"Campshareとは??"} />
+              <ListItemText primary={"使用技術"} />
             </ListItem>
           </List>
         </div>

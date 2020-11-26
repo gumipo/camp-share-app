@@ -4,6 +4,20 @@ import { push } from "connected-react-router";
 import { auth, FirebaseTimestamp, db } from "../../Firebase/index";
 import firebase from "firebase";
 
+export const addFavoriteLocation = (location) => {
+  return async (dispatch, getState) => {
+    const uid = getState().users.uid;
+    const favoriteRef = db
+      .collection("users")
+      .doc(uid)
+      .collection("favorite")
+      .doc(location.id);
+
+    location["favoriteLocationId"] = favoriteRef.id;
+    await favoriteRef.set(location);
+  };
+};
+
 //認証をリッスン関数
 export const listenAuthState = () => {
   return async (dispatch) => {

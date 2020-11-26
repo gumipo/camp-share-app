@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLocations } from "../../redux/Location/operations";
 import { getLocations } from "../../redux/Location/selector";
 import LocationCard from "../LocaTion/LocationCard";
 import styled from "styled-components";
-import { PrimaryButton, SelectBox } from "../UIkit";
 import { useEffect } from "react";
 
 const Home = () => {
@@ -12,6 +11,7 @@ const Home = () => {
   const selector = useSelector((state) => state);
   const locations = getLocations(selector);
 
+  console.log(locations);
   useEffect(() => {
     dispatch(fetchLocations("all"));
   }, []);
@@ -30,6 +30,9 @@ const Home = () => {
               images={location.images}
               lat={location.lat}
               lon={location.lon}
+              prefecture={location.prefecture}
+              evaluation={location.evaluation}
+              id={location.id}
             />
           ))}
       </StyledCampLocationArea>

@@ -21,6 +21,21 @@ export const fetchLocations = (prefecture) => {
   };
 };
 
+export const fetchFavoriteLocations = () => {
+  return async (dispatch, getState) => {
+    const uid = getState().users.uid;
+    const favoriteRef = db.collection("users").doc(uid).collection("favorite");
+    favoriteRef.get().then((snapshots) => {
+      const favoriteLocationsList = [];
+      snapshots.forEach((snapshot) => {
+        const location = snapshot.data();
+        favoriteLocationsList.push(location);
+      });
+      dispatch(fetchLocationsAction(favoriteLocationsList));
+    });
+  };
+};
+
 export const saveLocation = (
   images,
   name,

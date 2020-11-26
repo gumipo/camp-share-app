@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { push } from "connected-react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { getLocationWeather } from "../../redux/Location/selector";

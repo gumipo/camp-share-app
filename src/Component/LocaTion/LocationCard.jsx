@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import ImageSwiper from "./ImageSwiper";
 import { Language } from "@material-ui/icons";
@@ -10,12 +10,16 @@ import axios from "axios";
 import { fetchWeatherDataAction } from "../../redux/Location/actions";
 import { Divider } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import { FirebaseTimestamp, db } from "../../Firebase";
+import { addFavoriteLocation } from "../../redux/Users/operations";
+import { mergeClasses } from "@material-ui/styles";
+import { useEffect } from "react";
 
 export default function LocationCard(props) {
   const dispatch = useDispatch();
+  const uid = useSelector((state) => state.users.uid);
   const [isFavorite, setIsFavorite] = useState(false);
-
-  console.log(props);
+  const locationsRef = db.collection("locations");
 
   const API_KEY = "ead32199cb2793af95adbfb3cfe6474d";
   const lat = props.lat;
@@ -31,6 +35,53 @@ export default function LocationCard(props) {
       .then(() => {
         dispatch(push("/location/weather"));
       });
+  };
+
+  useEffect(() => {
+    db.collection("users")
+      .doc(uid)
+      .collection("favorite")
+      .get()
+      .then((snapshots) => {
+        snapshots.forEach((snapshot) => {
+          const data = snapshot.data();
+          const favoriteId = data.id;
+          if (props.id === favoriteId) {
+            setIsFavorite(true);
+          }
+        });
+      });
+  }, []);
+
+  const favoriteChange = () => {
+    const batch = db.batch();
+    const timestamp = FirebaseTimestamp.now();
+    if (!isFavorite) {
+      dispatch(
+        addFavoriteLocation({
+          images: props.images,
+          name: props.name,
+          Url: props.url,
+          prefecture: props.prefecture,
+          evaluation: props.evaluation,
+          address: props.address,
+          added_at: timestamp,
+          lat: lat,
+          lon: lon,
+          id: props.id,
+        })
+      );
+      batch.update(locationsRef.doc(props.id), { favoriteUser: uid });
+      setIsFavorite(true);
+    } else {
+      db.collection("users")
+        .doc(uid)
+        .collection("favorite")
+        .doc(props.id)
+        .delete();
+      batch.delete(locationsRef.doc(props.id));
+      setIsFavorite(false);
+    }
   };
 
   return (
@@ -64,7 +115,7 @@ export default function LocationCard(props) {
         </StyledCardFooterNav>
         <Divider />
         <StyledFavoriteButtonArea>
-          <IconButton onClick={() => setIsFavorite(!isFavorite)}>
+          <IconButton onClick={() => favoriteChange()}>
             <FavoriteIcon color={isFavorite ? "secondary" : "disabled"} />
           </IconButton>
         </StyledFavoriteButtonArea>
