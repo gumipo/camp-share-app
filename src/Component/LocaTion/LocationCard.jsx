@@ -61,6 +61,7 @@ export default function LocationCard(props) {
           images: props.images,
           name: props.name,
           Url: props.url,
+          bookingUrl: props.bookingUrl,
           prefecture: props.prefecture,
           evaluation: props.evaluation,
           address: props.address,
