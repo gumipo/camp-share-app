@@ -217,7 +217,6 @@ export const googleLogin = () => {
       .auth()
       .signInWithPopup(provider)
       .then((result) => {
-        console.log(result);
         const user = result.user;
         const image = user.photoURL;
         const uid = user.uid;
