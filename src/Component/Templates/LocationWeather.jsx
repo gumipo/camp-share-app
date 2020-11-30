@@ -15,7 +15,7 @@ import { Divider } from "@material-ui/core";
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
+    minWidth: 350,
   },
 });
 
@@ -75,7 +75,11 @@ export default LocationWeather;
 const StyledLocationWeather = styled.section`
   width: 800px;
   margin: 0 auto;
-  padding-top: 150px;
+  padding-top: 100px;
+  @media screen and (max-width: 767px) {
+    width: 370px;
+    margin-bottom: 70px;
+  }
 `;
 
 const StyledTitle = styled.h2`

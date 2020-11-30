@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <StyledSection>
       <StyledCampLocationArea>
-        {locations.length > 0 &&
+        {locations.length > 0 ? (
           locations.map((location, index) => (
             <LocationCard
               index={index}
@@ -33,8 +33,12 @@ const Home = () => {
               prefecture={location.prefecture}
               evaluation={location.evaluation}
               id={location.id}
+              bookingUrl={location.bookingUrl}
             />
-          ))}
+          ))
+        ) : (
+          <p>まだお気に入り登録がありません</p>
+        )}
       </StyledCampLocationArea>
     </StyledSection>
   );

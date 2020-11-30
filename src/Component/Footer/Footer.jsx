@@ -1,10 +1,20 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { push } from "connected-react-router";
 import styled from "styled-components";
+import HomeIcon from "@material-ui/icons/Home";
+import IconButton from "@material-ui/core/IconButton";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 const Footer = () => {
+  const dispatch = useDispatch();
   return (
     <StyledFooter>
-      <StyledFooterNav></StyledFooterNav>
+      <StyledFooterNav>
+        <IconButton onClick={() => dispatch(push("/"))}>
+          <HomeIcon color="secondary" />
+        </IconButton>
+      </StyledFooterNav>
     </StyledFooter>
   );
 };
@@ -12,7 +22,9 @@ const Footer = () => {
 export default Footer;
 
 const StyledFooter = styled.footer`
+  display: none;
   @media screen and (max-width: 767px) {
+    display: block;
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -23,20 +35,9 @@ const StyledFooter = styled.footer`
   }
 `;
 
-const StyledHooterList = styled.ul`
-  @media screen and (max-width: 767px) {
-    display: flex;
-    li {
-      font-size: 2px;
-    }
-  }
-`;
-
 const StyledFooterNav = styled.nav`
   color: white;
   display: flex;
-  text-align: center;
-  p {
-    flex: 1;
-  }
+  align-items: center;
+  justify-content: space-around;
 `;
