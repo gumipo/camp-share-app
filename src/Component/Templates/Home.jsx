@@ -33,6 +33,7 @@ const Home = () => {
               prefecture={location.prefecture}
               evaluation={location.evaluation}
               id={location.id}
+              bookingUrl={location.bookingUrl}
             />
           ))}
       </StyledCampLocationArea>

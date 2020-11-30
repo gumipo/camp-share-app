@@ -114,7 +114,10 @@ const ClosableDrawer = (props) => {
             <ListItem
               button
               key="question"
-              onClick={() => dispatch(push("/app/description"))}
+              onClick={(e) => {
+                dispatch(push("/app/description"));
+                props.onClose(e);
+              }}
             >
               <ListItemIcon>
                 <HelpOutline />

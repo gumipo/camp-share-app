@@ -12,7 +12,6 @@ import { Divider } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { FirebaseTimestamp, db } from "../../Firebase";
 import { addFavoriteLocation } from "../../redux/Users/operations";
-import { mergeClasses } from "@material-ui/styles";
 import { useEffect } from "react";
 
 export default function LocationCard(props) {
@@ -92,12 +91,13 @@ export default function LocationCard(props) {
       <StyledLocationDescriptionArea>
         <StyledLocationName>{props.name}</StyledLocationName>
         <StyledLocationAddress>
-          住所 : <span>{props.address}</span>
+          住所:<span>{props.address}</span>
         </StyledLocationAddress>
       </StyledLocationDescriptionArea>
       <Divider />
       <StyledCardFooter>
         <StyledCardFooterNav>
+          {/* ツイッターリンク */}
           <a
             target="_brank"
             href={
@@ -106,14 +106,36 @@ export default function LocationCard(props) {
               "&src=typed_query&f=live"
             }
           >
-            {"#" + props.name}
+            <img
+              src="https://upload.wikimedia.org/wikipedia/fr/c/c8/Twitter_Bird.svg"
+              alt="twitter_link"
+            />
           </a>
+          {/* インスタリンク */}
+          <a
+            target="_brank"
+            href={"https://www.instagram.com/explore/tags/" + props.name + "/"}
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+              alt="instagram_link"
+            />
+          </a>
+
           <a target="_brank" href={props.url}>
             <Language />
           </a>
           <p onClick={() => fetchWeatherPoint()}>天気予報</p>
         </StyledCardFooterNav>
         <Divider />
+        <StyledBookingURLArea>
+          <a target="_brank" href={props.bookingUrl}>
+            {props.bookingUrl ? "予約状況の確認" : "予約不要"}
+          </a>
+        </StyledBookingURLArea>
+
+        <Divider />
+
         <StyledFavoriteButtonArea>
           <IconButton onClick={() => favoriteChange()}>
             <FavoriteIcon color={isFavorite ? "secondary" : "disabled"} />
@@ -126,9 +148,13 @@ export default function LocationCard(props) {
 
 const StyledLocationCard = styled.div`
   width: 400px;
-  height: 500px;
-  box-shadow: 0px 0px 11px 2px black;
-  margin: 20px;
+  height: 540px;
+  box-shadow: 0px 0px 11px 6px #305f33;
+  margin: 25px;
+  @media screen and (max-width: 767px) {
+    width: 350px;
+    margin: 15px;
+  }
 `;
 
 const StyledCardHeader = styled.div`
@@ -148,10 +174,16 @@ const StyledLocationDescriptionArea = styled.div`
 const StyledLocationName = styled.h2`
   font-size: 25px;
   margin-top: 10px;
+  @media screen and (max-width: 767px) {
+    font-size: 20px;
+  }
 `;
 
 const StyledLocationAddress = styled.p`
   font-size: 15px;
+  @media screen and (max-width: 767px) {
+    font-size: 13px;
+  }
 `;
 
 const StyledCardFooter = styled.div`
@@ -167,9 +199,24 @@ const StyledCardFooterNav = styled.nav`
     color: blue;
     display: grid;
     place-items: center;
+    img {
+      width: 30px;
+      height: 30px;
+    }
   }
   P {
     cursor: pointer;
+  }
+`;
+
+const StyledBookingURLArea = styled.div`
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  a {
+    text-decoration: none;
+    color: gray;
   }
 `;
 

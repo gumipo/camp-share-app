@@ -7,6 +7,7 @@ const AppDescripntion = () => {
     <StyledAppDescription>
       <StyledTitle>使用技術</StyledTitle>
       <p>React</p>
+      <p>firebase</p>
       <Divider />
       <StyledSubTitle>ライブラリ</StyledSubTitle>
       <p>Redux</p>
@@ -26,6 +27,9 @@ const StyledAppDescription = styled.section`
   width: 500px;
   margin: 100px auto;
   text-align: center;
+  @media screen and (max-width: 767px) {
+    width: 370px;
+  }
 `;
 
 const StyledTitle = styled.h1`
